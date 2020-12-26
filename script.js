@@ -1,5 +1,17 @@
 console.log('connected');
 
+/* Header */
+var weekday = moment().format('dddd');
+$('#weekday').text(weekday);
+
+var todayDate = moment().format("D MMMM YYYY");
+$('.current-date').text(todayDate);
+
+var currentTime = moment().format('LT');
+$('.current-time').text(currentTime);
+
+var dailyQuote = quotes[Math.floor(Math.random() * quotes.length)];
+$('.quote').text(dailyQuote);
 
 /* TO DO LIST */
 
