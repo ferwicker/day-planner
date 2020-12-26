@@ -25,6 +25,12 @@ h2 {
   margin-bottom: 20px;
 }
 
+button {
+  border: none;
+  background: none;
+  padding: 10px;
+}
+
 .current-date {
   font-size: 24px;
 }
@@ -62,7 +68,7 @@ h2 {
 
 .to-do-container {
   position: sticky;
-  top: 215px;
+  top: 200px;
   border-radius: 20px;
   border: 4px solid #4B2D69;
   padding: 30px;
@@ -80,29 +86,45 @@ h2 {
 #todo-text{
   margin-bottom: 20px;
   width: 100%;
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #f2f2f2;
 }
 
 .todo-item {
   padding: 5px;
 }
 
+.save {
+  color: #4B2D69;
+}
+
+.save:hover {
+  opacity: .8;
+}
+
+.hour {
+  font-weight: 700;
+}
 
 textarea{
   background: transparent;
   border: none;
-  resize: none;
-  color: #000000;
-  border-left: 1px solid black;
+  resize: vertical;
+  color: #424242;
   padding: 10px;
 }
 
-.jumbotron {
-  text-align: center;
-  background-color: transparent;
-  color: black;
-  border-radius: 0;
-  border-bottom: 10px solid black;
+.hour-text {
+  width: 100%;
+  padding: 5px;
+  min-height: 40px;
+  line-height: 1.4;
 }
+
+
+
 
 .description{
   white-space: pre-wrap;
@@ -111,12 +133,6 @@ textarea{
 .time-block{
   text-align: center;
   border-radius: 15px;
-}
-
-.hour {
-  background-color: #ffffff;
-  color: #000000;
-  border-top: 1px dashed #000000;
 }
 
 .past {
