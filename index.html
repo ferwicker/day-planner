@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!--Bootstrap-->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!--Fontawesome-->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <!--Adobe Fonts-->
+    <link rel="stylesheet" href="https://use.typekit.net/upl4mpw.css">
+    <!--My CSS-->
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <title>Work Day Scheduler</title>
+
+  </head>
+
+  <body>
+    <header class="container-fluid header">
+      <div class="row">
+        <div class="col-md-8">
+          <h1>
+            Monday
+          </h1>
+          <span class="current-date">
+            26 December 2020
+          </span>
+        </div>
+        <div class="col-md-4 right-column">
+          <p class="current-time">
+            10:30am
+          </p>
+          <span class="quote"> 
+            “Today’s goals: Coffee and kindness. Maybe two coffees, and then kindness.” – Nanea Hoffman
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row main-content">
+        <div class="col-md-8">
+          <div class="timeblock-container">
+            <div class="timeblock">
+              9am
+            </div>
+            <div class="timeblock">
+              9am
+            </div>
+            <div class="timeblock">
+              9am
+            </div>
+            <div class="timeblock">
+              9am
+            </div>
+            <div class="timeblock">
+              9am
+            </div>
+            <div class="timeblock">
+              9am
+            </div>
+            <div class="timeblock">
+              9am
+            </div>
+            <div class="timeblock">
+              9am
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="to-do-container">
+            <h2>To Do</h2>
+            <div class="todos">
+              <form id="todo-form" method="POST">
+                <input type="text" placeholder="Add a to do" name="todo-text" id="todo-text" />
+              </form>
+              <ul id="todo-list"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
