@@ -18,20 +18,26 @@ $('.quote').text(dailyQuote);
 var todoInput = $("#todo-text");
 var todoForm = $("#todo-form");
 var todoList = $("#todo-list");
+var todoItem;
 
 var todos = [];
 
 todoForm.on('submit', function(event){
     event.preventDefault();
     var todoval = todoInput.val();
-    console.log(todoval),
-    todoList.append($('<li class="todo-item">').html(todoval));
+    $.trim(todoval);
+    todoItem = $('<div class="d-flex flex-row align-items-center">'); // create div to wrap checkbox and text
+    todoList.append(todoItem); // append the new div to list
+    todoItem.append('<i class="far fa-square checkbox" style="margin-right:5px;"></i>'); // append checkbox to item
+    todoItem.append($('<div class="todo-item">').html(todoval)); // append text to item
     todos.push(todoval);
     todoInput.val('');
     localStorage.setItem('to do list', JSON.stringify(todos));
 });
 
-/* if saved date is undefined or equal to current date then render saved items else clear all */
+
+/* RETRIEVE SAVED CONTENT */
+//if saved date is undefined or equal to current date then render saved items else clear all */
 var saveDate = localStorage.getItem('saved date');
 
 if(saveDate === null || saveDate === todayDate) {
@@ -41,20 +47,36 @@ if(saveDate === null || saveDate === todayDate) {
     $('#hour-text' + i).html(localStorage.getItem(i));
     };
     //retrieve and display saved to do list
-    var todoItems = JSON.parse(localStorage.getItem('to do list'));
-    
-    for(i=0; i < todoItems.length; i++){
-        todoList.append($('<li class="todo-item">').html(todoItems[i]));
-    }
+    todos = JSON.parse(localStorage.getItem('to do list'));
+    //if there are to do items saved then append list item for each
+    if(todos){
+    for(i=0; i < todos.length; i++){
+        todoItem = $('<div class="d-flex flex-row align-items-center">'); // create div to wrap checkbox and text
+        todoList.append(todoItem); // append the new div to list
+        todoItem.append('<i class="far fa-square checkbox" style="margin-right:5px;"></i>'); // append checkbox to item
+        todoItem.append($('<div class="todo-item">').html(todos[i])); // append text to item
+    }} else {
+        todos = [];
+    };
+// if saved date is different to current
 } else {
     console.log('no');
    //clear all
     for(i = 9; i < 18; i++){
     $('#hour-text' + i).html(''); //test tomorrow
+    //do a for loop to clear all local storage
     };
 };
 
-/* --Time blocks-- */
+/* TO DO CHECKBOX */
+// checkbox event listener to change to checked - how to keep preference?
+$('.checkbox').on('click', function(){
+    console.log('clicked');
+    $(this).toggleClass('fa-square');
+    $(this).toggleClass('fa-check-square');
+})
+
+/* TIME BLOCKS */
 
 /* Set colour */
 var currentHour = moment().hours();
@@ -80,16 +102,11 @@ $('.save').on('click', function(){
     localStorage.setItem(textHour, textContent);
 })
 
-/* Retrieve saved hour content */
-
-//save current date
+//SAVE CURRENT DATE
 saveDate = moment().format("D MMMM YYYY");
 localStorage.setItem('saved date', saveDate);
 
 /* Notes
-
- use forms to input the tasks, use prevent default, save to local storage, this part should
- be somewhat easy
 
  can tasks be saved as individual items? could they be marked as done?
 
@@ -99,6 +116,4 @@ localStorage.setItem('saved date', saveDate);
 
  toggle to dark mode?
 
- what colours will be for the past-current-future? future to be default, past greyed out,
- current, maybe a colourful background?
 */
