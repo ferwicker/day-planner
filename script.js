@@ -1,6 +1,6 @@
 console.log('connected');
 
-/* Header */
+/* HEADER */
 var weekday = moment().format('dddd');
 $('#weekday').text(weekday);
 
@@ -12,25 +12,6 @@ $('.current-time').text(currentTime);
 
 var dailyQuote = quotes[Math.floor(Math.random() * quotes.length)];
 $('.quote').text(dailyQuote);
-
-/* if saved date is undefined or equal to current date then render saved items else clear all */
-var saveDate = localStorage.getItem('saved date');
-
-if(saveDate === null || saveDate === todayDate) {
-    console.log('yes');
-    //retrieve saved timeblocks content
-    for(i = 9; i < 18; i++){
-    $('#hour-text' + i).html(localStorage.getItem(i));
-    };
-    //retrieve saved to do list
-
-} else {
-    console.log('no');
-   //clear all
-    for(i = 9; i < 18; i++){
-    $('#hour-text' + i).html(''); //test tomorrow
-    };
-}
 
 /* TO DO LIST */
 
@@ -44,11 +25,34 @@ todoForm.on('submit', function(event){
     event.preventDefault();
     var todoval = todoInput.val();
     console.log(todoval),
-    todoList.append($('<li class="todo-item">').text(todoval));
+    todoList.append($('<li class="todo-item">').html(todoval));
     todos.push(todoval);
     todoInput.val('');
-    localStorage.setItem('to do list', todos)
+    localStorage.setItem('to do list', JSON.stringify(todos));
 });
+
+/* if saved date is undefined or equal to current date then render saved items else clear all */
+var saveDate = localStorage.getItem('saved date');
+
+if(saveDate === null || saveDate === todayDate) {
+    console.log('yes');
+    //retrieve saved timeblocks content
+    for(i = 9; i < 18; i++){
+    $('#hour-text' + i).html(localStorage.getItem(i));
+    };
+    //retrieve and display saved to do list
+    var todoItems = JSON.parse(localStorage.getItem('to do list'));
+    
+    for(i=0; i < todoItems.length; i++){
+        todoList.append($('<li class="todo-item">').html(todoItems[i]));
+    }
+} else {
+    console.log('no');
+   //clear all
+    for(i = 9; i < 18; i++){
+    $('#hour-text' + i).html(''); //test tomorrow
+    };
+};
 
 /* --Time blocks-- */
 
