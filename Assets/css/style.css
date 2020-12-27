@@ -48,7 +48,7 @@ button {
 }
 
 .header {
-  padding: 40px 30px;
+  padding: 30px;
   background-color: white;
   border-bottom: 2px solid #383838;
   position: sticky;
@@ -66,13 +66,17 @@ button {
   position: relative;
 }
 
-.to-do-container {
+.sticky {
   position: sticky;
-  top: 200px;
+  top: 180px;
+}
+
+.to-do-container {
   border-radius: 20px;
   border: 4px solid #4B2D69;
   padding: 30px;
   min-height: 50vh;
+  margin-bottom: 20px;
 }
 
 .timeblock {
@@ -102,11 +106,27 @@ button {
 
 .save:hover {
   opacity: .8;
+  transition: all .3s ease-in-out;
 }
 
 .hour {
   font-weight: 700;
 }
+
+.button-purple {
+  color: white;
+  background-color: #4B2D69;
+  border-radius: 5px;
+  min-width: 200px;
+  text-transform: uppercase;
+}
+
+.button-purple:hover {
+  color: white;
+  background-color: #73588d;
+  transition: all .3s ease-in-out;
+}
+
 
 textarea{
   background: transparent;
@@ -125,29 +145,20 @@ textarea{
 
 
 
-
-.description{
-  white-space: pre-wrap;
-}
-
-.time-block{
-  text-align: center;
-  border-radius: 15px;
-}
-
 .past {
-  background-color: #d3d3d3;
-  color: white;
+  background-color: #e6e6e6;
+  border-color: #383838;
+  color: #424242;
 }
 
 .present {
-  background-color: #ff6961;
+  background-color: #b29aca;
   color: white;
 }
 
 .future {
-  background-color: #77dd77;
-  color: white;
+  background-color: white;
+  color: #4B2D69;
 }
 
 .saveBtn {

@@ -13,6 +13,17 @@ $('.current-time').text(currentTime);
 var dailyQuote = quotes[Math.floor(Math.random() * quotes.length)];
 $('.quote').text(dailyQuote);
 
+/* if saved date is undefined or equal to current date then render saved items else clear all */
+var saveDate = localStorage.getItem('saved date');
+
+if(saveDate === null || saveDate === todayDate) {
+    console.log('yes');
+    //retrieve saved items
+} else {
+    console.log('no');
+   //clear all
+}
+
 /* TO DO LIST */
 
 var todoInput = $("#todo-text");
@@ -25,24 +36,47 @@ todoForm.on('submit', function(event){
     event.preventDefault();
     var todoval = todoInput.val();
     console.log(todoval),
-    $('#todo-list').append($('<li class="todo-item">').text(todoval));
+    todoList.append($('<li class="todo-item">').text(todoval));
+    todos.push(todoval);
     todoInput.val('');
+    localStorage.setItem('to do list', todos)
 });
 
+/* Retrieve saved to do list */
 
+/* --Time blocks-- */
+
+/* Set colour */
+var currentHour = moment().hours();
+
+$('.timeblock').each(function(){
+    var hourValue = $(this).data('hour');
+
+    if(currentHour > hourValue){
+        $(this).addClass('past')
+    } else if(currentHour < hourValue){
+        $(this).addClass('future')
+    } else {
+        $(this).addClass('present')
+    }
+})
+
+/* Save content */
+
+$('.save').on('click', function(){
+    var textHour = $(this).parents('.timeblock').data('hour'); //this one works
+    var textContent = $('#hour-text' + textHour).html();
+    console.log(textContent);
+    localStorage.setItem(textHour, textContent);
+})
+
+/* Retrieve saved hour content */
+
+//save current date
+saveDate = moment().format("D MMMM YYYY");
+localStorage.setItem('saved date', saveDate);
 
 /* Notes
-Use moment.js
-
-choose fonts and colours
-display current date at the top, format : Monday, 14 December (next line) 2020
-then maybe if there's time add a cool quote for the day that can be picked at random from a matrix.
-
-Need to set up the classes for the final look
-
-Auto generate the hour blocks, use an if statement to check if the current hour is more, less or same
- - but also has to check with the date? do I give each hour a value? or will it know
- if 9 is 9am or pm automatically...
 
  use forms to input the tasks, use prevent default, save to local storage, this part should
  be somewhat easy
