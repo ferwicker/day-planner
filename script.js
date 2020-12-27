@@ -18,10 +18,18 @@ var saveDate = localStorage.getItem('saved date');
 
 if(saveDate === null || saveDate === todayDate) {
     console.log('yes');
-    //retrieve saved items
+    //retrieve saved timeblocks content
+    for(i = 9; i < 18; i++){
+    $('#hour-text' + i).html(localStorage.getItem(i));
+    };
+    //retrieve saved to do list
+
 } else {
     console.log('no');
    //clear all
+    for(i = 9; i < 18; i++){
+    $('#hour-text' + i).html(''); //test tomorrow
+    };
 }
 
 /* TO DO LIST */
@@ -41,8 +49,6 @@ todoForm.on('submit', function(event){
     todoInput.val('');
     localStorage.setItem('to do list', todos)
 });
-
-/* Retrieve saved to do list */
 
 /* --Time blocks-- */
 
