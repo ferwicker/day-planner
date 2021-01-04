@@ -7,8 +7,13 @@ $('#weekday').text(weekday);
 var todayDate = moment().format("D MMMM YYYY");
 $('.current-date').text(todayDate);
 
-var currentTime = moment().format('LT');
-$('.current-time').text(currentTime);
+
+var currentTime;
+var updateTime = setInterval(function(){
+    currentTime = moment().format('LT');
+    $('.current-time').text(currentTime);
+}, 100); //update time 10 times a second to minimise delay
+
 
 var dailyQuote = quotes[Math.floor(Math.random() * quotes.length)];
 $('.quote').text(dailyQuote);
@@ -92,19 +97,28 @@ $('#clear-todo').on('click',
 /* TIME BLOCKS */
 
 /* Set colour */
-var currentHour = moment().hours(); // set an interval
+var checkHour = setInterval(function(){
+    var currentHour = moment().hours(); 
 
-$('.timeblock').each(function(){
-    var hourValue = $(this).data('hour');
+    $('.timeblock').each(function(){
+        var hourValue = $(this).data('hour');
+    
+        if(currentHour > hourValue){
+            $(this).addClass('past');
+            $(this).removeClass('future');
+            $(this).removeClass('present');
+        } else if(currentHour < hourValue){
+            $(this).addClass('future');
+            $(this).removeClass('past');
+            $(this).removeClass('present');
+        } else {
+            $(this).addClass('present');
+            $(this).removeClass('future');
+            $(this).removeClass('past');
+        }
+    })
 
-    if(currentHour > hourValue){
-        $(this).addClass('past')
-    } else if(currentHour < hourValue){
-        $(this).addClass('future')
-    } else {
-        $(this).addClass('present')
-    }
-})
+}, 1000)
 
 /* Save content */
 
