@@ -35,6 +35,11 @@ todoForm.on('submit', function(event){
     localStorage.setItem('to do list', JSON.stringify(todos));
 });
 
+/* CLEAR FUNCTIONS */
+
+// CLEAR TIME BLOCKS
+
+//CLEAR ALL
 
 /* RETRIEVE SAVED CONTENT */
 //if saved date is undefined or equal to current date then render saved items else clear all */
@@ -76,10 +81,18 @@ $('.checkbox').on('click', function(){
     $(this).toggleClass('fa-check-square');
 })
 
+/* TO DO CLEAR BUTTON */
+$('#clear-todo').on('click',
+    function(){
+    todoList.html('');
+    localStorage.removeItem('to do list');
+    todos = [];
+    });
+
 /* TIME BLOCKS */
 
 /* Set colour */
-var currentHour = moment().hours();
+var currentHour = moment().hours(); // set an interval
 
 $('.timeblock').each(function(){
     var hourValue = $(this).data('hour');
@@ -108,12 +121,6 @@ localStorage.setItem('saved date', saveDate);
 
 /* Notes
 
- can tasks be saved as individual items? could they be marked as done?
-
- or or add a toggle between the day schedule and a to do list?
-
  do mobile version
-
- toggle to dark mode?
 
 */
