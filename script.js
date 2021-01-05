@@ -31,20 +31,16 @@ todoForm.on('submit', function(event){
     event.preventDefault();
     var todoval = todoInput.val();
     $.trim(todoval);
+    //add if here for empty values
     todoItem = $('<div class="d-flex flex-row align-items-center">'); // create div to wrap checkbox and text
     todoList.append(todoItem); // append the new div to list
     todoItem.append('<i class="far fa-square checkbox" style="margin-right:5px;"></i>'); // append checkbox to item
     todoItem.append($('<div class="todo-item">').html(todoval)); // append text to item
     todos.push(todoval);
+    console.log(todoval);
     todoInput.val('');
     localStorage.setItem('to do list', JSON.stringify(todos));
 });
-
-/* CLEAR FUNCTIONS */
-
-// CLEAR TIME BLOCKS
-
-//CLEAR ALL
 
 /* RETRIEVE SAVED CONTENT */
 //if saved date is undefined or equal to current date then render saved items else clear all */
@@ -70,12 +66,15 @@ if(saveDate === null || saveDate === todayDate) {
     };
 // if saved date is different to current
 } else {
-    console.log('no');
-   //clear all
-    for(i = 9; i < 18; i++){
-    $('#hour-text' + i).html(''); //test tomorrow
-    //do a for loop to clear all local storage
+   //clear time blocks
+   for(i = 9; i < 18; i++){
+    $('#hour-text' + i).html('');
+    localStorage.removeItem(i);
     };
+    //clear to do
+    todoList.html('');
+    localStorage.removeItem('to do list');
+    todos = [];
 };
 
 /* TO DO CHECKBOX */
@@ -93,6 +92,14 @@ $('#clear-todo').on('click',
     localStorage.removeItem('to do list');
     todos = [];
     });
+
+/* CLEAR DAY BUTTON */
+$('#clear-day').on('click', function(){
+    for(i = 9; i < 18; i++){
+        $('#hour-text' + i).html('');
+        localStorage.removeItem(i);
+        };
+});
 
 /* TIME BLOCKS */
 
@@ -125,16 +132,9 @@ var checkHour = setInterval(function(){
 $('.save').on('click', function(){
     var textHour = $(this).parents('.timeblock').data('hour'); //this one works
     var textContent = $('#hour-text' + textHour).html();
-    console.log(textContent);
     localStorage.setItem(textHour, textContent);
 })
 
 //SAVE CURRENT DATE
 saveDate = moment().format("D MMMM YYYY");
 localStorage.setItem('saved date', saveDate);
-
-/* Notes
-
- do mobile version
-
-*/
