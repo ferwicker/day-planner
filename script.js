@@ -32,6 +32,9 @@ todoForm.on('submit', function(event){
     var todoval = todoInput.val();
     $.trim(todoval);
     //add if here for empty values
+    if (todoval === ""){
+        //do nothing if empty
+    } else {
     todoItem = $('<div class="d-flex flex-row align-items-center">'); // create div to wrap checkbox and text
     todoList.append(todoItem); // append the new div to list
     todoItem.append('<i class="far fa-square checkbox" style="margin-right:5px;"></i>'); // append checkbox to item
@@ -40,6 +43,7 @@ todoForm.on('submit', function(event){
     console.log(todoval);
     todoInput.val('');
     localStorage.setItem('to do list', JSON.stringify(todos));
+    };
 });
 
 /* RETRIEVE SAVED CONTENT */
@@ -129,11 +133,24 @@ var checkHour = setInterval(function(){
 
 /* Save content */
 
+var textHour;
+var textContent;
+/* MANUAL SAVE
 $('.save').on('click', function(){
-    var textHour = $(this).parents('.timeblock').data('hour'); //this one works
-    var textContent = $('#hour-text' + textHour).html();
+    textHour = $(this).parents('.timeblock').data('hour'); //this one works
+    textContent = $('#hour-text' + textHour).html();
     localStorage.setItem(textHour, textContent);
-})
+});
+*/
+
+//save with interval
+var autoSave = setInterval(function(){
+    for(i = 9; i < 18; i++){
+        textHour = $('#hour-text' + i).parents('.timeblock').data('hour'); 
+        textContent = $('#hour-text' + textHour).html();
+        localStorage.setItem(textHour, textContent);
+    };
+}, 3000)
 
 //SAVE CURRENT DATE
 saveDate = moment().format("D MMMM YYYY");
