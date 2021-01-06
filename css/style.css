@@ -100,15 +100,6 @@ button {
   padding: 5px;
 }
 
-.save {
-  color: #4B2D69;
-}
-
-.save:hover {
-  opacity: .8;
-  transition: all .3s ease-in-out;
-}
-
 .hour {
   font-weight: 700;
 }
