@@ -27,22 +27,30 @@ var todoItem;
 
 var todos = [];
 
+//render to dos function
+
+function renderTodos(){
+    todoList.html('');
+    for(i=0; i < todos.length; i++){
+        todoItem = $('<div class="d-flex flex-row align-items-center">'); // create div to wrap checkbox and text
+        todoList.append(todoItem); // append the new div to list
+        todoItem.append('<i class="far fa-square checkbox" style="margin-right:5px;"></i>'); // append checkbox to item
+        todoItem.append($('<div class="todo-item">').html(todos[i])); // append text to item
+    };
+};
+
 todoForm.on('submit', function(event){
-    event.preventDefault();
+    event.preventDefault(); 
     var todoval = todoInput.val();
     $.trim(todoval);
-    //add if here for empty values
+
     if (todoval === ""){
-        //do nothing if empty
+        return;//do nothing if empty
     } else {
-    todoItem = $('<div class="d-flex flex-row align-items-center">'); // create div to wrap checkbox and text
-    todoList.append(todoItem); // append the new div to list
-    todoItem.append('<i class="far fa-square checkbox" style="margin-right:5px;"></i>'); // append checkbox to item
-    todoItem.append($('<div class="todo-item">').html(todoval)); // append text to item
     todos.push(todoval);
-    console.log(todoval);
     todoInput.val('');
     localStorage.setItem('to do list', JSON.stringify(todos));
+    renderTodos();
     };
 });
 
@@ -60,12 +68,8 @@ if(saveDate === null || saveDate === todayDate) {
     todos = JSON.parse(localStorage.getItem('to do list'));
     //if there are to do items saved then append list item for each
     if(todos){
-    for(i=0; i < todos.length; i++){
-        todoItem = $('<div class="d-flex flex-row align-items-center">'); // create div to wrap checkbox and text
-        todoList.append(todoItem); // append the new div to list
-        todoItem.append('<i class="far fa-square checkbox" style="margin-right:5px;"></i>'); // append checkbox to item
-        todoItem.append($('<div class="todo-item">').html(todos[i])); // append text to item
-    }} else {
+    renderTodos();
+    } else {
         todos = [];
     };
 // if saved date is different to current
@@ -83,7 +87,7 @@ if(saveDate === null || saveDate === todayDate) {
 
 /* TO DO CHECKBOX */
 // checkbox event listener to change to checked - how to keep preference?
-$('.checkbox').on('click', function(){
+$(document.body).on('click', '.checkbox', function(){
     console.log('clicked');
     $(this).toggleClass('fa-square');
     $(this).toggleClass('fa-check-square');
@@ -131,26 +135,27 @@ var checkHour = setInterval(function(){
 
 }, 1000)
 
-/* Save content */
+/* Save time blocks content */
 
 var textHour;
 var textContent;
-/* MANUAL SAVE
-$('.save').on('click', function(){
-    textHour = $(this).parents('.timeblock').data('hour'); //this one works
-    textContent = $('#hour-text' + textHour).html();
-    localStorage.setItem(textHour, textContent);
-});
-*/
 
-//save with interval
+//auto save with interval
 var autoSave = setInterval(function(){
     for(i = 9; i < 18; i++){
         textHour = $('#hour-text' + i).parents('.timeblock').data('hour'); 
         textContent = $('#hour-text' + textHour).html();
         localStorage.setItem(textHour, textContent);
     };
-}, 3000)
+}, 1000)
+
+/* MANUAL SAVE (needs html buttons to be added back to work)
+$('.save').on('click', function(){
+    textHour = $(this).parents('.timeblock').data('hour'); //this one works
+    textContent = $('#hour-text' + textHour).html();
+    localStorage.setItem(textHour, textContent);
+});
+*/
 
 //SAVE CURRENT DATE
 saveDate = moment().format("D MMMM YYYY");
