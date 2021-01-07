@@ -44,6 +44,7 @@ A random quote displays in the header of the application, quotes are chosen rand
 
 ## Roadmap
 Some planned updates for this application include colour theme selection and a more mobile friendly version with toggling between hourly events and the to do list.
+A known issue in the current version is that the preference of checked vs unchecked checkboxes for the to do list currently does not save when the page is reloaded.
 
 ## Credits
 The quote bank was compiled from:
