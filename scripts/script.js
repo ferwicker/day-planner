@@ -50,7 +50,11 @@ todoForm.on('submit', function(event){
     todos.push(todoval);
     todoInput.val('');
     localStorage.setItem('to do list', JSON.stringify(todos));
-    renderTodos();
+    // add new to do item
+    todoItem = $('<div class="d-flex flex-row align-items-center">'); // create div to wrap checkbox and text
+    todoList.append(todoItem); // append the new div to list
+    todoItem.append('<i class="far fa-square checkbox" style="margin-right:5px;"></i>'); // append checkbox to item
+    todoItem.append($('<div class="todo-item">').html(todoval)); // append text to item
     };
 });
 
