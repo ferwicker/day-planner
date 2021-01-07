@@ -37,7 +37,7 @@ Room for all your notes! The time blocks expand as you write to accommodate all 
 ### Daily quotes
 A random quote displays in the header of the application, quotes are chosen randomly and range from fun and lighearted to inspirational and famous quotes.
 
-<iframe src="https://drive.google.com/file/d/1VX3ZcKKllkjYCi4gJ0tRRoOhOb47DKF-/preview" width="640" height="480"></iframe>
+![Work day planner](Assets/images/Work%20Day%20Scheduler.gif)
 
 ### [See deployed application](https://ferwicker.github.io/day-planner/)
 
