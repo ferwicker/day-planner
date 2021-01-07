@@ -23,6 +23,9 @@ As always, the design process starts on paper, then transferred to Adobe XD for 
 - [Adobe XD](https://www.adobe.com/au/products/xd.html) (prototyping)
 
 ## Features
+
+![Work day planner](Assets/images/Work%20Day%20Scheduler.gif)
+
 ### Design and layout
 The design and layout of this application are created with usablity and ease on the eyes for long term and seamless use within your day. The colours are calm and pleasing, the layout presents your day as a whole, with a separate section for to do's that don't fit in any one hour of the day, so they are not forgotten.
 ### To-do list
@@ -36,8 +39,6 @@ The clock and the colours of the time blocks update in real time to reflect the 
 Room for all your notes! The time blocks expand as you write to accommodate all your notes and events with no need of scrolling on each hour slot.
 ### Daily quotes
 A random quote displays in the header of the application, quotes are chosen randomly and range from fun and lighearted to inspirational and famous quotes.
-
-![Work day planner](Assets/images/Work%20Day%20Scheduler.gif)
 
 ### [See deployed application](https://ferwicker.github.io/day-planner/)
 
