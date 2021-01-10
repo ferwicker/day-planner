@@ -23,6 +23,7 @@ $('.quote').text(dailyQuote);
 var todoInput = $("#todo-text");
 var todoForm = $("#todo-form");
 var todoList = $("#todo-list");
+var todoEl;
 var todoItem;
 
 var todos = [];
@@ -32,10 +33,10 @@ var todos = [];
 function renderTodos(){
     todoList.html('');
     for(i=0; i < todos.length; i++){
-        todoItem = $('<div class="d-flex flex-row align-items-center">'); // create div to wrap checkbox and text
-        todoList.append(todoItem); // append the new div to list
-        todoItem.append('<i class="far fa-square checkbox" style="margin-right:5px;"></i>'); // append checkbox to item
-        todoItem.append($('<div class="todo-item">').html(todos[i])); // append text to item
+        todoEl = $('<div class="d-flex flex-row align-items-center">'); // create div to wrap checkbox and text
+        todoList.append(todoEl); // append the new div to list
+        todoEl.append('<i class="far fa-' + todos[i].status + ' checkbox" style="margin-right:5px;"></i>'); // append checkbox to item
+        todoEl.append($('<div class="todo-item">').html(todos[i].text)); // append text to item
     };
 };
 
@@ -47,14 +48,15 @@ todoForm.on('submit', function(event){
     if (todoval === ""){
         return;//do nothing if empty
     } else {
-    todos.push(todoval);
     todoInput.val('');
+    todoItem = {'text':todoval, 'status':'square'};
+    todos.push(todoItem);
     localStorage.setItem('to do list', JSON.stringify(todos));
     // add new to do item
-    todoItem = $('<div class="d-flex flex-row align-items-center">'); // create div to wrap checkbox and text
-    todoList.append(todoItem); // append the new div to list
-    todoItem.append('<i class="far fa-square checkbox" style="margin-right:5px;"></i>'); // append checkbox to item
-    todoItem.append($('<div class="todo-item">').html(todoval)); // append text to item
+    todoEl = $('<div class="d-flex flex-row align-items-center">'); // create div to wrap checkbox and text
+    todoList.append(todoEl); // append the new div to list
+    todoEl.append('<i class="far fa-' + todoItem.status + ' checkbox" style="margin-right:5px;"></i>'); // append checkbox to item
+    todoEl.append($('<div class="todo-item">').html(todoval)); // append text to item
     };
 });
 
@@ -93,6 +95,18 @@ if(saveDate === null || saveDate === todayDate) {
 // checkbox event listener to change to checked - how to keep preference?
 $(document.body).on('click', '.checkbox', function(){
     console.log('clicked');
+    var todoText = $(this).siblings().text();
+    // find the index of the to do item in list
+    var index = todos.findIndex(x => x.text ===todoText);
+    // toggle property between square and checked
+    var toggleProp = function(obj, prop, first, second) {
+        obj[prop] = obj[prop] == first ? second : first;
+      };
+    toggleProp(todos[index], 'status', 'square', 'check-square');
+    // replaces the saved to do list with the changed one
+    localStorage.removeItem('to do list');
+    localStorage.setItem('to do list', JSON.stringify(todos));
+    //toggle between checked and unchecked classes
     $(this).toggleClass('fa-square');
     $(this).toggleClass('fa-check-square');
 })
