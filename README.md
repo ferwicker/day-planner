@@ -32,7 +32,6 @@ The design and layout of this application are created with usablity and ease on 
 Not everything we do during the day has a set time slot, and addind general to do's to a certain time might contribute to them being overlooked and forgotten. A separate To Do list section helps you keep track of this items and check them off as you go.
 ### Auto Save
 Although previous versions of this project used individual 'Save' buttons for each hour block to save events, I found during testing that this method was not very user friendly for daily use. The latest version uses a set interval to auto save notes, removing the need for save buttons.
-to do list
 ### Real time updates
 The clock and the colours of the time blocks update in real time to reflect the present, past and future events.
 ### Expanding time blocks
@@ -45,6 +44,7 @@ A random quote displays in the header of the application, quotes are chosen rand
 ## Roadmap
 Some planned updates for this application include colour theme selection and a more mobile friendly version with toggling between hourly events and the to do list.
 A known issue in the current version is that the preference of checked vs unchecked checkboxes for the to do list currently does not save when the page is reloaded.
+Another feature to be added is a 'trash' button to delete individual to do items.
 
 ## Credits
 The quote bank was compiled from:
